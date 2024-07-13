@@ -2,10 +2,15 @@
   <header class="header d-flex">
     <h2 class="ff-inter">Meu Mural</h2>
     <button routerLink="/createMessage" class="botao">Adicionar pensamento</button>
-    <div class="mural">
+    <div class="mural" *ngIf="messages.length > 0, else semPensamentos ">
       <div *ngFor="let message of messages">
         <app-message [message]="message"></app-message>
       </div>
     </div>
   </header>
 </section>
+<ng-template #semPensamentos class="mural">
+  <div class="ff-inter sem-pensamentos">
+    <p>Ainda não há pensamentos cadastrados</p>
+  </div>
+</ng-template>

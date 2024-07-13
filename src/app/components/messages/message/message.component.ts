@@ -12,7 +12,7 @@ export class MessageComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  larguramessage(): string {
+  larguraMessage(): string {
     if (this.message?.conteudo.length >= 256) {
       return 'message-g';
     }

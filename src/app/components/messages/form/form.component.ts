@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from '../message.service';
+import { MessageInterface } from '../interfaces';
 
 @Component({
   selector: 'app-form',
@@ -7,23 +9,43 @@ import { Router } from '@angular/router';
   styleUrls: ['./form.component.css'],
 })
 export class FormComponent implements OnInit {
-  pensamento = {
-    id: '1',
-    conteudo: 'Aprendendo Angular',
-    autoria: 'Dev',
-    modelo: 'modelo1',
+  message: MessageInterface = {
+    conteudo: '',
+    autoria: '',
+    modelo: '',
   };
+  title = 'Adicione';
 
-  constructor(public router: Router) {}
+  constructor(
+    private router: Router,
+    private service: MessageService,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.service.findById(parseInt(id!)).subscribe((message) => {
+        this.message = message;
+      });
+      this.message.id = parseInt(id!);
+      this.title = 'Edite';
+    }
+  }
 
-  criarPensamento() {
-    alert('Novo pensamento criado!');
+  createMessage() {
+    if (this.message.id) {
+      this.service.edit(this.message).subscribe(() => {
+        this.router.navigate(['']);
+      });
+    } else {
+      this.service.create(this.message).subscribe(() => {
+        this.router.navigate(['']);
+      });
+    }
   }
 
   cancelar() {
     this.router.navigate(['']);
-    alert('Ação cancelada!');
   }
 }

@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 
 import { HomeMessageComponent } from './components/messages/home-message/home-message.component';
 import { MessageComponent } from './components/messages/message/message.component';
+import { HttpClientModule } from '@angular/common/http';
+import { DeleteMessageComponent } from './components/messages/delete-message/delete-message.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +21,9 @@ import { MessageComponent } from './components/messages/message/message.componen
     FormComponent,
     HomeMessageComponent,
     MessageComponent,
+    DeleteMessageComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
