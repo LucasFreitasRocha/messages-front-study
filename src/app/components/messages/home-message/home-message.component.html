@@ -1,0 +1,11 @@
+<section class="container">
+  <header class="header d-flex">
+    <h2 class="ff-inter">Meu Mural</h2>
+    <button routerLink="/createMessage" class="botao">Adicionar pensamento</button>
+    <div class="mural">
+      <div *ngFor="let message of messages">
+        <app-message [message]="message"></app-message>
+      </div>
+    </div>
+  </header>
+</section>
