@@ -66,4 +66,12 @@ export class FormComponent implements OnInit {
   cancelar() {
     this.router.navigate(['']);
   }
+
+  enableButton(): string {
+    if (this.form.valid) {
+      return 'botao';
+    } else {
+      return 'botao__desabilitado';
+    }
+  }
 }
