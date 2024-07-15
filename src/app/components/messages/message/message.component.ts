@@ -9,6 +9,8 @@ import { MessageService } from '../message.service';
 })
 export class MessageComponent implements OnInit {
   @Input() message!: MessageInterface;
+  @Input() listaFavoritos: MessageInterface[] = [];
+
   constructor(private service: MessageService) {}
 
   ngOnInit(): void {}
@@ -29,7 +31,11 @@ export class MessageComponent implements OnInit {
 
   atualizarFavoritos() {
     this.message.favorito = !this.message.favorito;
-    this.service.edit(this.message).subscribe();
+    this.service
+      .edit(this.message)
+      .subscribe(() =>
+        this.listaFavoritos.splice(this.listaFavoritos.indexOf(this.message), 1)
+      );
     console.log(this.message.favorito);
   }
 }

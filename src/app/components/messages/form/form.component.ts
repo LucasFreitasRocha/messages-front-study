@@ -36,6 +36,7 @@ export class FormComponent implements OnInit {
         Validators.compose([Validators.required, Validators.minLength(3)]),
       ],
       modelo: ['modelo1'],
+      favorito: [false],
     });
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -43,6 +44,7 @@ export class FormComponent implements OnInit {
         this.form.get('conteudo')?.setValue(message.conteudo);
         this.form.get('modelo')?.setValue(message.modelo);
         this.form.get('autoria')?.setValue(message.autoria);
+        this.form.get('favorito')?.setValue(message.favorito);
       });
       this.form.get('id')?.setValue(parseInt(id!));
       this.title = 'Edite';

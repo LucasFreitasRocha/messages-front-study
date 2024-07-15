@@ -10,7 +10,11 @@ export class MessageService {
   private readonly API = 'http://localhost:3000/messages';
   constructor(private client: HttpClient) {}
 
-  list(page: number, filter: string): Observable<MessageInterface[]> {
+  list(
+    page: number,
+    filter: string,
+    favoritos: boolean
+  ): Observable<MessageInterface[]> {
     const limit = 5;
 
     let params = new HttpParams().set('_page', page).set('_limit', limit);
@@ -19,6 +23,9 @@ export class MessageService {
       params = params.set('q', filter);
     }
 
+    if (favoritos) {
+      params = params.set('favorito', true);
+    }
     return this.client.get<MessageInterface[]>(this.API, { params });
   }
   create(message: MessageInterface): Observable<MessageInterface> {

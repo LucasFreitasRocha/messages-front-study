@@ -5,11 +5,17 @@
         (keyup)="findMessage()">
       <img src="/assets/imagens/lupa.png" alt="Lupa azul">
     </div>
-    <h2 class="ff-inter">Meu Mural</h2>
-    <button routerLink="/createMessage" class="botao">Adicionar pensamento</button>
+    <h2 class="ff-inter">{{ title }}</h2>
+
+    <div class="botoes">
+      <button class="botao" (click)="recarregarComponente()">Meu Mural</button>
+      <button class="botao" (click)="listarFavoritos()">Meus Favoritos</button>
+      <button routerLink="/createMessage" class="botao">Adicionar pensamento</button>
+    </div>
+
     <div class="mural" *ngIf="messages.length > 0, else semPensamentos ">
       <div *ngFor="let message of messages">
-        <app-message [message]="message"></app-message>
+        <app-message [message]="message" [listaFavoritos]="listaFavoritos"></app-message>
       </div>
     </div>
   </header>
