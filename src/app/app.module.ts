@@ -12,6 +12,7 @@ import { HomeMessageComponent } from './components/messages/home-message/home-me
 import { MessageComponent } from './components/messages/message/message.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DeleteMessageComponent } from './components/messages/delete-message/delete-message.component';
+import { ButtonLoadingMoreMessagesComponent } from './components/messages/home-message/button-loading-more-messages/button-loading-more-messages.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { DeleteMessageComponent } from './components/messages/delete-message/del
     HomeMessageComponent,
     MessageComponent,
     DeleteMessageComponent,
+    ButtonLoadingMoreMessagesComponent,
   ],
   imports: [
     BrowserModule,

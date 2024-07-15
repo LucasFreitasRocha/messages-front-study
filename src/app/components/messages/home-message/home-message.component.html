@@ -9,6 +9,8 @@
     </div>
   </header>
 </section>
+<app-button-loading-more-messages [hasMoreMessages]="hasMoreMessages" (click)="loadMoreMessage()">
+</app-button-loading-more-messages>
 <ng-template #semPensamentos class="mural">
   <div class="ff-inter sem-pensamentos">
     <p>Ainda não há pensamentos cadastrados</p>
