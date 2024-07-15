@@ -11,20 +11,29 @@ export class HomeMessageComponent implements OnInit {
   messages: MessageInterface[] = [];
   page: number = 1;
   hasMoreMessages: boolean = true;
+  filter: string = '';
   constructor(private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.messageService
-      .list(this.page)
+      .list(this.page, this.filter)
       .subscribe((messages) => (this.messages = messages));
   }
 
   loadMoreMessage() {
-    this.messageService.list(++this.page).subscribe((messages) => {
+    this.messageService.list(++this.page, this.filter).subscribe((messages) => {
       this.messages.push(...messages);
       if (!messages.length) {
         this.hasMoreMessages = false;
       }
+    });
+  }
+
+  findMessage() {
+    this.hasMoreMessages = true;
+    this.page = 1;
+    this.messageService.list(this.page, this.filter).subscribe((messages) => {
+      this.messages = messages;
     });
   }
 }

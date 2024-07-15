@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MessageInterface } from '../interfaces';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-message',
@@ -8,7 +9,7 @@ import { MessageInterface } from '../interfaces';
 })
 export class MessageComponent implements OnInit {
   @Input() message!: MessageInterface;
-  constructor() {}
+  constructor(private service: MessageService) {}
 
   ngOnInit(): void {}
 
@@ -17,5 +18,18 @@ export class MessageComponent implements OnInit {
       return 'message-g';
     }
     return 'message-p';
+  }
+
+  mudarIconeFavorito(): string {
+    if (this.message.favorito == false) {
+      return 'inativo';
+    }
+    return 'ativo';
+  }
+
+  atualizarFavoritos() {
+    this.message.favorito = !this.message.favorito;
+    this.service.edit(this.message).subscribe();
+    console.log(this.message.favorito);
   }
 }

@@ -10,10 +10,15 @@ export class MessageService {
   private readonly API = 'http://localhost:3000/messages';
   constructor(private client: HttpClient) {}
 
-  list(page: number): Observable<MessageInterface[]> {
+  list(page: number, filter: string): Observable<MessageInterface[]> {
     const limit = 5;
 
     let params = new HttpParams().set('_page', page).set('_limit', limit);
+
+    if (filter.trim().length > 2) {
+      params = params.set('q', filter);
+    }
+
     return this.client.get<MessageInterface[]>(this.API, { params });
   }
   create(message: MessageInterface): Observable<MessageInterface> {
